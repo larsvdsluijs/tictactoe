@@ -2,29 +2,42 @@
 
 <div class="container">
   <div class="selection-container" *ngIf="showStartScreen">
-  <h2>Welk character mag beginnen?</h2>
+    <h2>Welk character mag beginnen?</h2>
 
-  <div class="character-selector">
-    <div class="cross-character" (click)="setStartingCharacter(0)">O</div>
-    <div class="circle-character" (click)="setStartingCharacter(1)">X</div>
-  </div>
+    <div class="character-selector">
+      <div class="cross-character" (click)="setStartingCharacter(0)">O</div>
+      <div class="circle-character" (click)="setStartingCharacter(1)">X</div>
     </div>
+  </div>
 
-  <div class="tic-tac-toe-board" *ngIf="showPlayGrid">
-    <div [ngClass]="{
-        'tic-tac-toe-cell': cell === '',
-        'cross': cell === 'X',
-        'circle': cell === 'O'}" *ngFor="let cell of playGrid; let i = index" (click)="selectCell(i)">{{ cell }}</div>
+  <div class="play-grid-container" *ngIf="showPlayGrid">
+    <div class="title-container">
+    <h2>
+      <div class="centered-element" [ngClass]="{
+      'start-cross': characters[activeCharacter] === 'X',
+      'start-circle': characters[activeCharacter] === 'O'
+    }">{{ characters[activeCharacter] }}</div>
+      is aan de beurt
+    </h2>
+      </div>
+    <div class="tic-tac-toe-board">
+      <div [ngClass]="{
+      'tic-tac-toe-cell': cell === '',
+      'cross': cell === 'X',
+      'circle': cell === 'O'}" *ngFor="let cell of playGrid; let i = index" (click)="selectCell(i)">{{ cell }}</div>
+    </div>
   </div>
 </div>
 
 <div class="end-screen" *ngIf="showEndScreen">
   <h2 *ngIf="winningCharacter === ''">{{endMessage}}</h2>
-  <h2 *ngIf="winningCharacter !== ''"><div [ngClass]="{
+  <h2 *ngIf="winningCharacter !== ''">
+    <div [ngClass]="{
       'end-cross': winningCharacter === 'X',
       'end-circle': winningCharacter === 'O'
     }"
-  >{{winningCharacter}}</div>{{ endMessage }}</h2>
+    >{{winningCharacter}}</div>
+    {{ endMessage }}</h2>
 
   <button (click)="startNewGame()">Rematch!</button>
 </div>

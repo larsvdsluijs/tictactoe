@@ -33,13 +33,13 @@ export class AppComponent {
   ]
 
   selectCell(index: number) {
-    if(this.playGrid[index] === "")
+    if(this.playGrid[index] === "") {
       this.playGrid[index] = this.characters[this.activeCharacter];
-
-    if(this.activeCharacter === 0)
-      this.activeCharacter = 1
-    else
-      this.activeCharacter = 0;
+      if (this.activeCharacter === 0)
+        this.activeCharacter = 1
+      else
+        this.activeCharacter = 0;
+    }
 
     this.checkWinner()
   }
@@ -53,20 +53,19 @@ export class AppComponent {
         this.playGrid[a] === this.playGrid[c]
       ) {
         this.winningCharacter = this.playGrid[a];
-        this.endMessage = "Won the game!"
+        this.endMessage = "Heeft gewonnen!"
         this.showPlayGrid = false;
         this.showEndScreen = true;
         return;
       }
+    }
 
-      if(this.playGrid.every(cell => cell !== "")) {
-        this.showEndScreen = true;
-        this.showPlayGrid = false;
-        this.showStartScreen = false;
-        this.endMessage = "It's a Tie"
-        return;
-      }
-
+    if(this.playGrid.every(cell => cell !== "")) {
+      this.showEndScreen = true;
+      this.showPlayGrid = false;
+      this.showStartScreen = false;
+      this.endMessage = "Gelijkspel!"
+      return;
     }
   }
 
