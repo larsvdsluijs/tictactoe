@@ -1,0 +1,32 @@
+<body>
+
+<div class="container">
+  <div class="selection-container" *ngIf="showStartScreen">
+  <h2>Welk character mag beginnen?</h2>
+
+  <div class="character-selector">
+    <div class="cross-character" (click)="setStartingCharacter(0)">O</div>
+    <div class="circle-character" (click)="setStartingCharacter(1)">X</div>
+  </div>
+    </div>
+
+  <div class="tic-tac-toe-board" *ngIf="showPlayGrid">
+    <div [ngClass]="{
+        'tic-tac-toe-cell': cell === '',
+        'cross': cell === 'X',
+        'circle': cell === 'O'}" *ngFor="let cell of playGrid; let i = index" (click)="selectCell(i)">{{ cell }}</div>
+  </div>
+</div>
+
+<div class="end-screen" *ngIf="showEndScreen">
+  <h2 *ngIf="winningCharacter === ''">{{endMessage}}</h2>
+  <h2 *ngIf="winningCharacter !== ''"><div [ngClass]="{
+      'end-cross': winningCharacter === 'X',
+      'end-circle': winningCharacter === 'O'
+    }"
+  >{{winningCharacter}}</div>{{ endMessage }}</h2>
+
+  <button (click)="startNewGame()">Rematch!</button>
+</div>
+
+</body>
